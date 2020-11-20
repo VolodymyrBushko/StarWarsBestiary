@@ -1,31 +1,26 @@
 .random-planet {
     display: flex;
-    align-items: stretch;
-    margin: 60px 0;
+    align-items: center;
     background-color: #1d1d1d;
-    padding: 20px 0;
-    border-radius: 5px;
     justify-content: space-around;
-}
-
-.random-planet .planet-image {
-    align-self: center;
+    height: 260px;
+    margin: 60px 0;
+    border-radius: 5px;
 }
 
 .random-planet .planet-image img {
+    height: 220px;
     border-radius: 5px;
-    height: 200px;
 }
 
-.random-planet .planet-title {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.random-planet .planet-info-list {
+.random-planet .planet-info .planet-info-list {
     list-style: none;
-    padding: 0;
     margin: 0;
+    padding: 0;
+}
+
+.random-planet .planet-info .planet-title {
+    text-align: center;
 }
 
 .random-planet .planet-info-item {
