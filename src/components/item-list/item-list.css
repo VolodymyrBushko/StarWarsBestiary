@@ -1,0 +1,25 @@
+.item-list-wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #1d1d1d;
+}
+
+.item-list-wrapper .item-list {
+    width: 100%;
+}
+
+.item-list-wrapper .item-list .list-group-item {
+    background-color: #1d1d1d;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.item-list-wrapper .item-list .list-group-item:hover {
+    background-color: #393838;
+}
+
+.item-list-wrapper .item-list .active {
+    background-color: #393838;
+}

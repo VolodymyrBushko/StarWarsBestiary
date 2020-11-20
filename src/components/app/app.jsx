@@ -7,6 +7,18 @@ import ItemList from '../item-list';
 import PersonDetails from '../person-details';
 
 export default class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedItem: null
+    };
+  }
+
+  onItemSelect = id => {
+    this.setState({selectedItem: id});
+  }
+
   render() {
     return (
       <div>
@@ -22,10 +34,10 @@ export default class App extends Component {
           </div>
           <div className="row mb-2">
             <div className="col-md-6">
-              <ItemList/>
+              <ItemList onItemSelect={this.onItemSelect}/>
             </div>
             <div className="col-md-6">
-              <PersonDetails/>
+              <PersonDetails itemId={this.state.selectedItem}/>
             </div>
           </div>
         </div>
