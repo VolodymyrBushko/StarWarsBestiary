@@ -1,0 +1,14 @@
+.error-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.error-indicator .title {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.error-indicator .icon {
+    width: 128px;
+}
