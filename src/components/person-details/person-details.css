@@ -1,0 +1,27 @@
+.person-details-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.person-details-wrapper .person-details {
+    background-color: #1d1d1d;
+    margin: auto;
+    height: 100%;
+}
+
+.person-details-wrapper .person-details .card-title {
+    text-align: center;
+}
+
+.person-details-wrapper .person-details .card-text {
+    padding: 8px;
+    font-size: 16px;
+    border-bottom: 1px solid rgba(245, 245, 245, 0.3);
+}
+
+.person-details-wrapper .person-details .icon {
+    width: 100%;
+    height: 236px;
+}
