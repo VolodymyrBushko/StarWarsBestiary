@@ -49,7 +49,7 @@ export default class ItemList extends Component {
         className={`list-group-item ${isActive ? 'active' : ''}`}
         onClick={() => this.onItemClick(id)}
       >
-        {this.props.renderItem(item)}
+        {this.props.children(item)}
       </li>
     );
   }
