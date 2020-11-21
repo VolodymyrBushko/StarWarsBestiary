@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import './item-list.css';
 
-import SwapiService from '../../services/swapi-service';
 import Spinner from '../spinner';
 import ErrorIndicator from '../error-indicator';
 
@@ -9,43 +8,40 @@ export default class ItemList extends Component {
 
   constructor(props) {
     super(props);
-    this.swapiService = new SwapiService();
     this.state = {
       itemList: {},
       loading: true,
-      error: false,
-      selectedItem: null
+      error: false
     };
   }
 
   componentDidMount() {
-    this.swapiService
-      .getAllPeople()
-      .then(this.onPeopleListReceive)
+    const {getData} = this.props;
+    getData()
+      .then(this.onData)
       .catch(this.onError);
   }
 
-  onPeopleListReceive = itemList => {
-    const firstItem = itemList[0].id;
+  onData = itemList => {
     this.setState({
       itemList,
       error: false,
       loading: false,
-      selectedItem: firstItem
     });
-    this.props.onItemSelect(firstItem);
+    this.props.onItemSelect(itemList[0].id);
   }
 
   onError = () => {
     this.setState({error: true, loading: false});
   }
 
-  renderList = itemList => {
+  renderItemList = itemList => {
     const items = itemList.map(this.renderItem);
     return <ul className="item-list list-group">{items}</ul>;
   }
 
-  renderItem = ({id, name}) => {
+  renderItem = (item) => {
+    const {id} = item;
     const isActive = +id === +this.state.selectedItem;
     return (
       <li
@@ -53,7 +49,7 @@ export default class ItemList extends Component {
         className={`list-group-item ${isActive ? 'active' : ''}`}
         onClick={() => this.onItemClick(id)}
       >
-        {name}
+        {this.props.renderItem(item)}
       </li>
     );
   }
@@ -68,7 +64,7 @@ export default class ItemList extends Component {
     const {itemList, loading, error} = this.state;
     const errorMessage = error ? <ErrorIndicator/> : null;
     const spinner = loading ? <Spinner/> : null;
-    const elementList = !(loading || error) ? this.renderList(itemList) : null;
+    const elementList = !(loading || error) ? this.renderItemList(itemList) : null;
 
     return (
       <div className="item-list-wrapper">

@@ -7,6 +7,10 @@ import PeoplePage from '../people-page';
 
 export default class App extends Component {
 
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
       <div>
@@ -20,8 +24,6 @@ export default class App extends Component {
 
             </div>
           </div>
-          <PeoplePage/>
-          <PeoplePage/>
           <PeoplePage/>
         </div>
       </div>

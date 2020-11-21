@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
-import './people-page.css';
-
+import './planets-page.css';
 import ItemList from '../item-list';
 import PersonDetails from '../person-details';
 import ErrorIndicator from '../error-indicator';
 import SwapiService from '../../services/swapi-service';
-import Row from '../row';
 
 export default class PeoplePage extends Component {
 
@@ -32,20 +30,19 @@ export default class PeoplePage extends Component {
       return <ErrorIndicator/>;
     }
 
-    const itemList = (
-      <ItemList
-        onItemSelect={this.onItemSelect}
-        getData={this.swapiService.getAllPeople}
-        renderItem={({name, gender, birthYear}) => `${name} (${gender}, ${birthYear})`}
-      />
-    );
-
-    const personDetails = (
-      <PersonDetails itemId={this.state.selectedItem}/>
-    );
-
     return (
-      <Row left={itemList} right={personDetails}/>
+      <div className="people-page row mb-2">
+        <div className="col-md-6">
+          <ItemList
+            onItemSelect={this.onItemSelect}
+            getData={this.swapiService.getAllPeople}
+            renderItem={({name, gender, birthYear}) => `${name} (${gender}, ${birthYear})`}
+          />
+        </div>
+        <div className="col-md-6">
+          <PersonDetails itemId={this.state.selectedItem}/>
+        </div>
+      </div>
     );
   }
 
