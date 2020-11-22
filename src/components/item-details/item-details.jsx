@@ -1,35 +1,35 @@
 import React, {Component} from 'react';
-import './person-details.css';
+import './item-details.css';
 
-import SwapiService from '../../services/swapi-service';
 import ErrorIndicator from '../error-indicator';
 import Spinner from '../spinner';
 
-export default class PersonDetails extends Component {
+export default class ItemDetails extends Component {
 
   constructor(props) {
     super(props);
-    this.swapiService = new SwapiService();
     this.state = {
-      person: null,
+      item: null,
+      image: null,
       loading: true,
       error: false
     };
   }
 
   componentDidMount() {
-    this.updatePerson();
+    this.updateItem();
   }
 
   componentDidUpdate(prevProps) {
     if (+this.props.itemId !== +prevProps.itemId) {
-      this.updatePerson();
+      this.updateItem();
     }
   }
 
-  onPersonReceive = person => {
+  onData = item => {
     this.setState({
-      person,
+      item,
+      image: this.props.getImageUrl(item),
       loading: false,
       error: false
     });
@@ -40,15 +40,13 @@ export default class PersonDetails extends Component {
       loading: false,
       error: true
     });
-    console.log('error');
   }
 
-  updatePerson = () => {
+  updateItem = () => {
     this.setState(() => {
-      const {itemId} = this.props;
-      this.swapiService
-        .getPerson(itemId)
-        .then(this.onPersonReceive)
+      const {itemId, getData} = this.props;
+      getData(itemId)
+        .then(this.onData)
         .catch(this.onError);
       return {
         loading: true,
@@ -59,28 +57,30 @@ export default class PersonDetails extends Component {
 
   render() {
 
-    const {person, loading, error} = this.state;
+    const {item, image, loading, error} = this.state;
     const spinner = loading ? <Spinner/> : null;
     const errorMessage = error ? <ErrorIndicator/> : null;
-    const personDetailsView = !(loading || error) ? <PersonDetailsView person={person}/> : null;
+    const itemDetailsView = !(loading || error) ? <ItemDetailsView item={item} image={image}/> : null;
 
     return (
-      <div className="person-details-wrapper">
+      <div className="item-details-wrapper">
         {spinner}
         {errorMessage}
-        {personDetailsView}
+        {itemDetailsView}
       </div>
     );
   }
 
 }
 
-const PersonDetailsView = ({person}) => {
-  const {id, name, gender, birthYear, eyeColor} = person;
+const ItemDetailsView = ({item, image}) => {
+  const {name, gender, birthYear, eyeColor} = item;
   return (
-    <div className="person-details card" style={{width: '20rem'}}>
-      <img className="card-img-top icon"
-           src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`} alt="person"/>
+    <div className="item-details card" style={{width: '20rem'}}>
+      <img
+        className="card-img-top icon"
+        src={image}
+        alt="person"/>
       <div className="card-body">
         <h4 className="card-title">{name}</h4>
         <p className="card-text">Gender: {gender}</p>
