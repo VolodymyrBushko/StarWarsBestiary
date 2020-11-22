@@ -60,7 +60,8 @@ export default class ItemDetails extends Component {
     const {item, image, loading, error} = this.state;
     const spinner = loading ? <Spinner/> : null;
     const errorMessage = error ? <ErrorIndicator/> : null;
-    const itemDetailsView = !(loading || error) ? <ItemDetailsView item={item} image={image}/> : null;
+    const itemDetailsView = !(loading || error) ?
+      <ItemDetailsView item={item} image={image} fields={this.props.children}/> : null;
 
     return (
       <div className="item-details-wrapper">
@@ -73,8 +74,7 @@ export default class ItemDetails extends Component {
 
 }
 
-const ItemDetailsView = ({item, image}) => {
-  const {name, gender, birthYear, eyeColor} = item;
+const ItemDetailsView = ({item, image, fields}) => {
   return (
     <div className="item-details card" style={{width: '20rem'}}>
       <img
@@ -82,10 +82,10 @@ const ItemDetailsView = ({item, image}) => {
         src={image}
         alt="person"/>
       <div className="card-body">
-        <h4 className="card-title">{name}</h4>
-        <p className="card-text">Gender: {gender}</p>
-        <p className="card-text">Birth year: {birthYear}</p>
-        <p className="card-text">Eye color: {eyeColor}</p>
+        <h4 className="card-title">{item.name}</h4>
+        {React.Children.map(fields, field => {
+          return React.cloneElement(field, {item});
+        })}
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import Header from '../header';
 import RandomPlanet from '../random-planet';
 import PeoplePage from '../people-page';
 import Row from '../row';
+import Record from '../record';
 import ItemDetails from '../item-details';
 import SwapiService from '../../services/swapi-service';
 
@@ -23,16 +24,22 @@ export default class App extends Component {
       <ItemDetails
         itemId={11}
         getData={getPerson}
-        getImageUrl={getPersonImage}
-      />
+        getImageUrl={getPersonImage}>
+        <Record field="gender" label="Gander"/>
+        <Record field="birthYear" label="Birth year" />
+        <Record field="eyeColor" label="Eye color"/>
+      </ItemDetails>
     );
 
     const starshipDetails = (
       <ItemDetails
         itemId={5}
         getData={getStarship}
-        getImageUrl={getStarshipImage}
-      />
+        getImageUrl={getStarshipImage}>
+        <Record field="model" label="Model"/>
+        <Record field="length" label="Length" />
+        <Record field="costInCredits" label="Cost"/>
+      </ItemDetails>
     );
 
     return (
