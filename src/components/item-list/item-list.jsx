@@ -4,7 +4,7 @@ import './item-list.css';
 import Spinner from '../spinner';
 import ErrorIndicator from '../error-indicator';
 
-export default class ItemList extends Component {
+class ItemList extends Component {
 
   constructor(props) {
     super(props);
@@ -76,3 +76,18 @@ export default class ItemList extends Component {
   }
 
 }
+
+const f = () => {
+  return class extends Component {
+
+
+
+    render() {
+      return (
+        <ItemList {...this.props}/>
+      );
+    }
+  }
+}
+
+export default f();
