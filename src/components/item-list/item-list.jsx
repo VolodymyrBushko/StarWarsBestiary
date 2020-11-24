@@ -1,93 +1,34 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './item-list.css';
 
-import Spinner from '../spinner';
-import ErrorIndicator from '../error-indicator';
+import withData from '../hoc/with-data';
+import SwapiService from '../../services/swapi-service';
 
-class ItemList extends Component {
+const {getAllPeople} = new SwapiService();
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      itemList: {},
-      loading: true,
-      error: false
-    };
-  }
+const ItemList = props => {
 
-  componentDidMount() {
-    const {getData} = this.props;
-    getData()
-      .then(this.onData)
-      .catch(this.onError);
-  }
+  const {selectedItem, onItemClick, children, itemList: data} = props;
 
-  onData = itemList => {
-    this.setState({
-      itemList,
-      error: false,
-      loading: false,
-    });
-    this.props.onItemSelect(itemList[0].id);
-  }
-
-  onError = () => {
-    this.setState({error: true, loading: false});
-  }
-
-  renderItemList = itemList => {
-    const items = itemList.map(this.renderItem);
-    return <ul className="item-list list-group">{items}</ul>;
-  }
-
-  renderItem = (item) => {
-    const {id} = item;
-    const isActive = +id === +this.state.selectedItem;
+  const itemList = data.map(({id, ...item}) => {
+    const isActive = +id === +selectedItem;
     return (
       <li
         key={id}
         className={`list-group-item ${isActive ? 'active' : ''}`}
-        onClick={() => this.onItemClick(id)}
+        onClick={() => onItemClick(id)}
       >
-        {this.props.children(item)}
+        {children({id, ...item})}
       </li>
     );
-  }
+  });
 
-  onItemClick = id => {
-    this.setState({selectedItem: id});
-    this.props.onItemSelect(id);
-  }
-
-  render() {
-
-    const {itemList, loading, error} = this.state;
-    const errorMessage = error ? <ErrorIndicator/> : null;
-    const spinner = loading ? <Spinner/> : null;
-    const elementList = !(loading || error) ? this.renderItemList(itemList) : null;
-
-    return (
-      <div className="item-list-wrapper">
-        {spinner}
-        {elementList}
-        {errorMessage}
-      </div>
-    );
-  }
-
+  return (
+    <ul className="item-list list-group"
+    >
+      {itemList}
+    </ul>
+  );
 }
 
-const f = () => {
-  return class extends Component {
-
-
-
-    render() {
-      return (
-        <ItemList {...this.props}/>
-      );
-    }
-  }
-}
-
-export default f();
+export default withData(ItemList, getAllPeople);
