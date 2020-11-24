@@ -19,7 +19,9 @@ export default class App extends Component {
             <div className="col-md-6">
             </div>
           </div>
+
           <PeoplePage/>
+
         </div>
       </div>
     );

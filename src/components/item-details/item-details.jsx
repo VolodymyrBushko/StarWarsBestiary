@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './item-details.css';
 
+import ItemDetailsView from '../item-details-view';
 import ErrorIndicator from '../error-indicator';
 import Spinner from '../spinner';
 
@@ -64,7 +65,7 @@ export default class ItemDetails extends Component {
       <ItemDetailsView item={item} image={image} fields={this.props.children}/> : null;
 
     return (
-      <div className="item-details-wrapper">
+      <div className="item-details">
         {spinner}
         {errorMessage}
         {itemDetailsView}
@@ -72,21 +73,4 @@ export default class ItemDetails extends Component {
     );
   }
 
-}
-
-const ItemDetailsView = ({item, image, fields}) => {
-  return (
-    <div className="item-details card" style={{width: '20rem'}}>
-      <img
-        className="card-img-top icon"
-        src={image}
-        alt="person"/>
-      <div className="card-body">
-        <h4 className="card-title">{item.name}</h4>
-        {React.Children.map(fields, field => {
-          return React.cloneElement(field, {item});
-        })}
-      </div>
-    </div>
-  );
 }
