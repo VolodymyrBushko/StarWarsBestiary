@@ -27,10 +27,7 @@ export default class PeoplePage extends Component {
       return <ErrorIndicator/>;
     }
 
-    const itemList = <PersonList
-      onItemSelect={this.onItemSelect}>
-      {({name, birthYear}) => `${name} (${birthYear})`}
-    </PersonList>
+    const itemList = <PersonList onItemSelect={this.onItemSelect}/>
 
     const personDetails =
       <PersonDetails selectedItem={this.state.selectedItem}/>
