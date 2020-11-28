@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import ErrorIndicator from '../../error-indicator';
 import Spinner from '../../spinner';
 
-const withData = (View, getData) => {
+const withData = View => {
   return class extends Component {
 
     constructor(props) {
@@ -17,7 +17,7 @@ const withData = (View, getData) => {
     }
 
     componentDidMount() {
-      getData()
+      this.props.getData()
         .then(this.onData)
         .catch(this.onError);
     }
