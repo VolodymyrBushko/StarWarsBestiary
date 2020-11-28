@@ -5,11 +5,19 @@ import Header from '../header';
 import RandomPlanet from '../random-planet';
 import PeoplePage from '../people-page';
 
+import SwapiService from '../../services/swapi-service';
+import {SwapiServiceProvider} from '../swapi-service-context';
+
 export default class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.swapiService = new SwapiService();
+  }
 
   render() {
     return (
-      <div>
+      <SwapiServiceProvider value={this.swapiService}>
         <Header/>
         <div className="container">
           <div className="row mb-2">
@@ -23,7 +31,7 @@ export default class App extends Component {
           <PeoplePage/>
 
         </div>
-      </div>
+      </SwapiServiceProvider>
     );
   }
 
