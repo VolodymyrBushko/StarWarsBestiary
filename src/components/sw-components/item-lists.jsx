@@ -15,7 +15,7 @@ const renderStarship = ({name, model}) => <span>{name} ({model})</span>;
 
 const mapPersonMethodsToProps = ({getAllPeople}) => ({getData: getAllPeople});
 const mapPlanetMethodsToProps = ({getAllPlanets}) => ({getData: getAllPlanets});
-const mapStarshipMethodsToProps = ({getAllStarship}) => ({getData: getAllStarship});
+const mapStarshipMethodsToProps = ({getAllStarships}) => ({getData: getAllStarships});
 
 const PersonList = withSwapiService(withData(withChild(ItemList, renderPerson)), mapPersonMethodsToProps);
 const PlanetList = withSwapiService(withData(withChild(ItemList, renderPlanet)), mapPlanetMethodsToProps);

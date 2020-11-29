@@ -4,6 +4,8 @@ import './app.css';
 import Header from '../header';
 import RandomPlanet from '../random-planet';
 import PeoplePage from '../people-page';
+import PlanetPage from '../planet-page';
+import StarshipPage from '../starship-page';
 
 import SwapiService from '../../services/swapi-service';
 import {SwapiServiceProvider} from '../swapi-service-context';
@@ -29,6 +31,8 @@ export default class App extends Component {
           </div>
 
           <PeoplePage/>
+          <PlanetPage/>
+          <StarshipPage/>
 
         </div>
       </SwapiServiceProvider>
