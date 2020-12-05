@@ -28,7 +28,6 @@ const withData = View => {
         error: false,
         loading: false,
       });
-      this.props.onItemSelect(itemList[0].id);
     }
 
     onError = () => {

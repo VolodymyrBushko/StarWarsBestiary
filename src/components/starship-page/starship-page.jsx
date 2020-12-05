@@ -1,42 +1,18 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './starship-page.css';
 
-import {StarshipDetails, StarshipList} from '../sw-components';
-import ErrorIndicator from '../error-indicator';
-import SwapiService from '../../services/swapi-service';
+import {StarshipList} from '../sw-components';
 import ErrorBoundry from '../error-boundry';
-import Row from '../row';
+import {withRouter} from 'react-router-dom';
 
-export default class StarshipPage extends Component {
-
-  constructor(props) {
-    super(props);
-    this.swapiService = new SwapiService();
-    this.state = {
-      selectedItem: 1
-    };
-  }
-
-  onItemSelect = id => {
-    this.setState({selectedItem: id});
-  }
-
-  render() {
-
-    if (this.state.error) {
-      return <ErrorIndicator/>;
-    }
-
-    const itemList = <StarshipList onItemSelect={this.onItemSelect}/>
-
-    const starshipDetails =
-      <StarshipDetails selectedItem={this.state.selectedItem}/>
-
-    return (
-      <ErrorBoundry>
-        <Row left={itemList} right={starshipDetails}/>
-      </ErrorBoundry>
-    );
-  }
-
+const StarshipPage = ({history}) => {
+  return (
+    <ErrorBoundry>
+      <StarshipList onItemSelect={itemId => {
+        history.push(`/starships/${itemId}`);
+      }}/>
+    </ErrorBoundry>
+  );
 }
+
+export default withRouter(StarshipPage);
