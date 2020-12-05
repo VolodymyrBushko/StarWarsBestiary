@@ -10,6 +10,8 @@ import StarshipPage from '../starship-page';
 import SwapiService from '../../services/swapi-service';
 import {SwapiServiceProvider} from '../swapi-service-context';
 
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+
 export default class App extends Component {
 
   constructor(props) {
@@ -20,21 +22,23 @@ export default class App extends Component {
   render() {
     return (
       <SwapiServiceProvider value={this.swapiService}>
-        <Header/>
-        <div className="container">
-          <div className="row mb-2">
-            <div className="col-md-6">
-              <RandomPlanet/>
+        <Router>
+          <Header/>
+          <div className="container">
+            <div className="row mb-2">
+              <div className="col-md-6">
+                <RandomPlanet/>
+              </div>
+              <div className="col-md-6">
+              </div>
             </div>
-            <div className="col-md-6">
-            </div>
+
+            <Route path="/people" component={PeoplePage}/>
+            <Route path="/planets" component={PlanetPage}/>
+            <Route path="/starships" component={StarshipPage}/>
+
           </div>
-
-          <PeoplePage/>
-          <PlanetPage/>
-          <StarshipPage/>
-
-        </div>
+        </Router>
       </SwapiServiceProvider>
     );
   }
