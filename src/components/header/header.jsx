@@ -1,6 +1,8 @@
 import React from 'react';
 import './header.css';
 
+import {Link} from 'react-router-dom';
+
 const Header = () => {
   return (
     <nav className="header">
@@ -9,13 +11,13 @@ const Header = () => {
       </div>
       <ul className="list">
         <li className="list-item">
-          <a href="https://google.com">People</a>
+          <Link to="/people">People</Link>
         </li>
         <li className="list-item">
-          <a href="https://google.com">Planets</a>
+          <Link to="/planets">Planets</Link>
         </li>
         <li className="list-item">
-          <a href="https://google.com">Starships</a>
+          <Link to="/starships">Starships</Link>
         </li>
       </ul>
     </nav>
