@@ -1,6 +1,5 @@
 .item-details-view {
     background-color: #1d1d1d;
-    margin: 50px 0;
     width: 100%;
     padding: 20px;
     border: none;
@@ -17,7 +16,7 @@
 }
 
 .item-details-view .icon {
-    width: 300px;
+    width: 200px;
     height: 200px;
     border-radius: 5px;
 }

@@ -44,10 +44,16 @@ export default class ItemDetails extends Component {
   }
 
   updateItem = () => {
-    const {itemId, getData} = this.props;
-    getData(itemId)
-      .then(this.onData)
-      .catch(this.onError);
+    this.setState(() => {
+      const {itemId, getData} = this.props;
+      getData(itemId)
+        .then(this.onData)
+        .catch(this.onError);
+      return {
+        loading: true,
+        error: false
+      }
+    })
   }
 
   render() {
