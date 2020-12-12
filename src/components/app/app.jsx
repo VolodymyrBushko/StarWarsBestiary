@@ -10,7 +10,7 @@ import StarshipPage from '../starship-page';
 import SwapiService from '../../services/swapi-service';
 import {SwapiServiceProvider} from '../swapi-service-context';
 
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import StarshipDetails from '../sw-components/starship-details';
 
 export default class App extends Component {
@@ -34,15 +34,19 @@ export default class App extends Component {
               </div>
             </div>
 
-            <Route path="/" render={() => <h2>Welcome to StarWars</h2>} exact/>
-            <Route path="/people/:id?" component={PeoplePage}/>
-            <Route path="/planets" component={PlanetPage}/>
-            <Route path="/starships" component={StarshipPage} exact/>
+            <Switch>
+              <Route path="/" render={() => <h2>Welcome to StarWars</h2>} exact/>
+              <Route path="/people/:id?" component={PeoplePage}/>
+              <Route path="/planets" component={PlanetPage}/>
+              <Route path="/starships" component={StarshipPage} exact/>
 
-            <Route path="/starships/:id" render={({match}) => {
-              const {id} = match.params;
-              return <StarshipDetails selectedItem={id}/>;
-            }}/>
+              <Route path="/starships/:id" render={({match}) => {
+                const {id} = match.params;
+                return <StarshipDetails selectedItem={id}/>;
+              }}/>
+
+              <Route render={() => <h2>Page not found!</h2>}/>
+            </Switch>
 
           </div>
         </Router>
