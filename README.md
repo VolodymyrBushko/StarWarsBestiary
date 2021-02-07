@@ -1,1 +1,1 @@
-# StarWarsBestiary
+# StarWars
